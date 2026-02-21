@@ -1,6 +1,7 @@
 import Nav from './components/Nav'
 import Hero from './components/Hero'
 import Services from './components/Services'
+import TechStack from './components/TechStack'
 import About from './components/About'
 import Process from './components/Process'
 import Contact from './components/Contact'
@@ -13,6 +14,7 @@ export default function App() {
       <main>
         <Hero />
         <Services />
+        <TechStack />
         <About />
         <Process />
         <Contact />
