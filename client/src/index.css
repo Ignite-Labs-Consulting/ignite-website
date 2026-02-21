@@ -1,0 +1,325 @@
+/* ================================================
+   IGNITE LABS — Design System v2
+   Dark-first. Fire-inspired. Built for engineers.
+   ================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Brand */
+  --orange:         #FF5722;
+  --orange-light:   #FF7043;
+  --orange-bright:  #FF8A65;
+  --orange-dark:    #E64A19;
+  --amber:          #FFB300;
+  --cyan:           #22D3EE;
+  --blue:           #3B82F6;
+  --green:          #10B981;
+  --purple:         #8B5CF6;
+
+  /* Backgrounds */
+  --bg-0:          #050810;
+  --bg-1:          #080C18;
+  --bg-2:          #0C1120;
+  --bg-3:          #111827;
+  --bg-card:       rgba(255, 255, 255, 0.04);
+  --bg-card-hover: rgba(255, 255, 255, 0.07);
+
+  /* Text */
+  --text-1: #F8FAFC;
+  --text-2: #CBD5E1;
+  --text-3: #94A3B8;
+  --text-4: #64748B;
+
+  /* Borders */
+  --border:        rgba(255, 255, 255, 0.07);
+  --border-accent: rgba(255, 87, 34, 0.35);
+  --border-active: rgba(255, 87, 34, 0.65);
+
+  /* Glows */
+  --glow-orange:      rgba(255, 87, 34, 0.25);
+  --glow-orange-soft: rgba(255, 87, 34, 0.10);
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Font sizes */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  1.875rem;
+  --text-4xl:  2.25rem;
+  --text-5xl:  3rem;
+  --text-6xl:  3.75rem;
+  --text-7xl:  4.5rem;
+
+  /* Spacing */
+  --sp-1:  0.25rem;
+  --sp-2:  0.5rem;
+  --sp-3:  0.75rem;
+  --sp-4:  1rem;
+  --sp-5:  1.25rem;
+  --sp-6:  1.5rem;
+  --sp-8:  2rem;
+  --sp-10: 2.5rem;
+  --sp-12: 3rem;
+  --sp-16: 4rem;
+  --sp-20: 5rem;
+  --sp-24: 6rem;
+  --sp-32: 8rem;
+
+  /* Radius */
+  --r-sm:   6px;
+  --r-md:   10px;
+  --r-lg:   16px;
+  --r-xl:   24px;
+  --r-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm:     0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md:     0 4px 20px rgba(0, 0, 0, 0.5);
+  --shadow-lg:     0 8px 40px rgba(0, 0, 0, 0.6);
+  --shadow-orange: 0 0 30px rgba(255, 87, 34, 0.3), 0 0 80px rgba(255, 87, 34, 0.1);
+  --shadow-card:   0 1px 0 rgba(255, 255, 255, 0.07), 0 0 0 1px var(--border);
+
+  /* Transitions */
+  --ease-fast:   150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-base:   250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-slow:   400ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Layout */
+  --container:  1200px;
+  --nav-height: 72px;
+}
+
+/* ── Base ──────────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-1);
+  color: var(--text-1);
+  font-size: var(--text-base);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar       { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-0); }
+::-webkit-scrollbar-thumb { background: var(--orange-dark); border-radius: 3px; }
+
+a   { text-decoration: none; color: inherit; }
+img { max-width: 100%; height: auto; }
+button { font-family: var(--font-sans); }
+
+/* ── Layout ────────────────────────────────────── */
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--sp-6);
+}
+
+.section {
+  padding: var(--sp-24) 0;
+}
+
+/* ── Gradient text ─────────────────────────────── */
+
+.gradient-text {
+  background: linear-gradient(135deg, #FF5722 0%, #FF8A65 50%, #FFB300 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-cool {
+  background: linear-gradient(135deg, #FF5722, #FF7043, #22D3EE);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Buttons ───────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--r-md);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all var(--ease-base);
+  text-decoration: none;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--orange-light), var(--orange-dark));
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(255, 87, 34, 0.4);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(255, 87, 34, 0.55);
+}
+.btn-primary:active { transform: translateY(0); }
+
+.btn-outline {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-1);
+  border: 1px solid var(--border-accent);
+  backdrop-filter: blur(8px);
+}
+.btn-outline:hover {
+  background: rgba(255, 87, 34, 0.08);
+  border-color: var(--orange);
+  transform: translateY(-2px);
+  color: var(--orange-bright);
+}
+
+.btn-lg {
+  padding: 0.875rem 2rem;
+  font-size: var(--text-lg);
+  border-radius: var(--r-lg);
+}
+
+/* ── Section label ─────────────────────────────── */
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: var(--sp-4);
+  font-family: var(--font-mono);
+}
+.section-label::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--orange), var(--amber));
+  border-radius: 2px;
+}
+
+/* ── Tags ──────────────────────────────────────── */
+
+.tag {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--r-full);
+  font-size: 0.7rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  background: rgba(255, 87, 34, 0.09);
+  color: var(--orange-bright);
+  border: 1px solid rgba(255, 87, 34, 0.2);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.tag-cyan   { background: rgba(34,211,238,0.08); color: var(--cyan);   border-color: rgba(34,211,238,0.2); }
+.tag-blue   { background: rgba(59,130,246,0.08); color: var(--blue);   border-color: rgba(59,130,246,0.2); }
+.tag-green  { background: rgba(16,185,129,0.08); color: var(--green);  border-color: rgba(16,185,129,0.2); }
+.tag-purple { background: rgba(139,92,246,0.08); color: var(--purple); border-color: rgba(139,92,246,0.2); }
+
+/* ── Scroll reveal ─────────────────────────────── */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Glass card ────────────────────────────────── */
+
+.glass-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  backdrop-filter: blur(12px);
+  transition: all var(--ease-base);
+}
+.glass-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-accent);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px var(--border-accent);
+}
+
+/* ── Grid bg ───────────────────────────────────── */
+
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ── Divider ───────────────────────────────────── */
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+
+/* ── Animations ────────────────────────────────── */
+
+@keyframes float-up {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

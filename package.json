@@ -1,0 +1,14 @@
+{
+  "name": "ignite-website",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "setup": "cp \"Ignite Labs logo design.png\" client/public/logo.png",
+    "dev": "npm run setup && concurrently \"npm --prefix server run dev\" \"npm --prefix client run dev\"",
+    "build": "npm run setup && npm --prefix client run build",
+    "start": "npm --prefix server start"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
