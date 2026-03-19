@@ -17,7 +17,6 @@ const MINI_STATS = [
 ]
 
 const stats = [
-  { value: '150+', label: 'Ideas brought to life'  },
   { value: '~2wks', label: 'POC turnaround'        },
   { value: '3',    label: 'Core specialties'        },
   { value: '5★',   label: 'Client satisfaction'    },
