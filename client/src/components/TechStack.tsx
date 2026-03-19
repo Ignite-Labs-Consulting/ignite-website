@@ -3,16 +3,15 @@ import './TechStack.css'
 
 const buildWith = [
   { name: 'React',       category: 'Frontend' },
-  { name: 'Next.js',     category: 'Frontend' },
   { name: 'TypeScript',  category: 'Frontend' },
   { name: 'Node.js',     category: 'Backend'  },
   { name: 'Python',      category: 'Backend'  },
+  { name: 'Java',      category: 'Backend'  },
   { name: 'PostgreSQL',  category: 'Backend'  },
   { name: 'MongoDB',     category: 'Backend'  },
   { name: 'AWS',         category: 'Cloud'    },
   { name: 'Vercel',      category: 'Cloud'    },
   { name: 'Docker',      category: 'Cloud'    },
-  { name: 'Railway',     category: 'Cloud'    },
 ]
 
 const connectTo = [
@@ -53,7 +52,7 @@ export default function TechStack() {
           </h2>
           <p className="stack__subtitle">
             We work with the tools that get the job done right. Whatever your idea needs,
-            we've likely already shipped something with it.
+            we've likely already shipped something with it or will figure it out to get the job done.
           </p>
         </div>
 

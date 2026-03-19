@@ -70,7 +70,7 @@ export default function Services() {
           <span className="section-label">What We Do</span>
           <h2 className="services__title">
             Three things we're<br />
-            <span className="gradient-text">really good at</span>
+            <span className="gradient-text">good at</span>
           </h2>
           <p className="services__subtitle">
             We don't try to do everything. We go deep on full stack engineering, cloud,

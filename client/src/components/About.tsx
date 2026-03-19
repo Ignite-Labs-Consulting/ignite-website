@@ -2,7 +2,6 @@ import { useScrollReveal } from '../hooks/useScrollReveal'
 import './About.css'
 
 const stats = [
-  { value: '150+',  label: 'Ideas Brought to Life',    sub: 'POCs, MVPs, full products'  },
   { value: '~2wks', label: 'Avg POC Turnaround',        sub: 'from kickoff to working demo'},
   { value: '100%',  label: 'Fixed-Price Projects',      sub: 'no surprise invoices, ever' },
   { value: '5★',    label: 'Average Client Rating',     sub: 'from verified reviews'      },
@@ -40,11 +39,11 @@ const values = [
   },
 ]
 
-const testimonial = {
-  quote: "I had an idea for an app but no clue how to build it. Ignite Labs scoped it out in a call, showed me a working version in two weeks, and had it live within a month. Game-changer.",
-  name: 'Marcus T.',
-  role: 'Founder, RouteSync',
-}
+// const testimonial = {
+//   quote: "I had an idea for an app but no clue how to build it. Ignite Labs scoped it out in a call, showed me a working version in two weeks, and had it live within a month. Game-changer.",
+//   name: 'Marcus T.',
+//   role: 'Founder, RouteSync',
+// }
 
 export default function About() {
   useScrollReveal()
@@ -82,14 +81,14 @@ export default function About() {
             ))}
           </div>
 
-          <blockquote className="about__testimonial reveal reveal-delay-4">
+          {/* <blockquote className="about__testimonial reveal reveal-delay-4">
             <p className="about__testimonial-quote">"{testimonial.quote}"</p>
             <footer className="about__testimonial-footer">
               <span className="about__testimonial-stars" aria-label="5 stars">★★★★★</span>
               <span className="about__testimonial-name">{testimonial.name}</span>
               <span className="about__testimonial-role">{testimonial.role}</span>
             </footer>
-          </blockquote>
+          </blockquote> */}
         </div>
 
         {/* Right: stats */}
