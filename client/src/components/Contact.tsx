@@ -2,7 +2,7 @@ import { useState, FormEvent } from 'react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import './Contact.css'
 
-type FormState = 'idle' | 'submitting' | 'success' | 'error'
+type FormState = 'idle' | 'success'
 
 interface FormData {
   name: string
@@ -12,39 +12,59 @@ interface FormData {
   message: string
 }
 
+interface FormErrors {
+  name?: string
+  email?: string
+  message?: string
+}
+
 const initialForm: FormData = { name: '', email: '', company: '', service: '', message: '' }
+
+function validate(form: FormData): FormErrors {
+  const errors: FormErrors = {}
+  if (!form.name.trim()) errors.name = 'Name is required.'
+  if (!form.email.trim()) {
+    errors.email = 'Email is required.'
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+    errors.email = 'Enter a valid email address.'
+  }
+  if (!form.message.trim()) errors.message = 'Please describe your idea.'
+  return errors
+}
 
 export default function Contact() {
   useScrollReveal()
-  const [form, setForm]   = useState<FormData>(initialForm)
-  const [state, setState] = useState<FormState>('idle')
-  const [error, setError] = useState('')
+  const [form, setForm]     = useState<FormData>(initialForm)
+  const [state, setState]   = useState<FormState>('idle')
+  const [errors, setErrors] = useState<FormErrors>({})
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
-    setState('submitting')
-    setError('')
-
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      })
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}))
-        throw new Error(data.message || 'Something went wrong')
-      }
-      setState('success')
-      setForm(initialForm)
-    } catch (err) {
-      setState('error')
-      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
+  ) => {
+    const { name, value } = e.target
+    setForm((prev) => ({ ...prev, [name]: value }))
+    if (errors[name as keyof FormErrors]) {
+      setErrors((prev) => ({ ...prev, [name]: undefined }))
     }
+  }
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault()
+    const errs = validate(form)
+    if (Object.keys(errs).length > 0) {
+      setErrors(errs)
+      return
+    }
+
+    const subject = encodeURIComponent(`New Ignite Labs Inquiry from ${form.name}`)
+    const body = encodeURIComponent(
+      `Name: ${form.name}\nEmail: ${form.email}\nBusiness / Project: ${form.company || 'Not provided'}\nStage: ${form.service || 'Not specified'}\n\nMessage:\n${form.message}`
+    )
+
+    window.location.href = `mailto:richard.thomas103@outlook.com?subject=${subject}&body=${body}`
+    setState('success')
+    setForm(initialForm)
+    setErrors({})
   }
 
   return (
@@ -93,10 +113,10 @@ export default function Contact() {
                   <polyline points="22,6 12,13 2,6" />
                 </svg>
               </div>
-              <div>
+              {/* <div>
                 <div className="contact__detail-label">Email us anytime</div>
                 <a href="mailto:hello@ignitelabs.io" className="contact__detail-val">hello@ignitelabs.io</a>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -123,12 +143,16 @@ export default function Contact() {
                 <div className="contact__field">
                   <label htmlFor="name">Your name *</label>
                   <input id="name" name="name" type="text" placeholder="Jane Smith"
-                    value={form.name} onChange={handleChange} required autoComplete="name" />
+                    value={form.name} onChange={handleChange} autoComplete="name"
+                    className={errors.name ? 'input--error' : ''} />
+                  {errors.name && <span className="contact__field-error">{errors.name}</span>}
                 </div>
                 <div className="contact__field">
                   <label htmlFor="email">Email address *</label>
                   <input id="email" name="email" type="email" placeholder="jane@example.com"
-                    value={form.email} onChange={handleChange} required autoComplete="email" />
+                    value={form.email} onChange={handleChange} autoComplete="email"
+                    className={errors.email ? 'input--error' : ''} />
+                  {errors.email && <span className="contact__field-error">{errors.email}</span>}
                 </div>
               </div>
 
@@ -157,26 +181,17 @@ export default function Contact() {
                 <textarea
                   id="message" name="message" rows={5}
                   placeholder="What are you trying to build? What problem does it solve? Who's it for? Don't worry about technical details — just describe it like you'd explain it to a friend."
-                  value={form.message} onChange={handleChange} required
+                  value={form.message} onChange={handleChange}
+                  className={errors.message ? 'input--error' : ''}
                 />
+                {errors.message && <span className="contact__field-error">{errors.message}</span>}
               </div>
 
-              {state === 'error' && (
-                <div className="contact__error" role="alert">{error}</div>
-              )}
-
-              <button type="submit" className="btn btn-primary contact__submit"
-                disabled={state === 'submitting'}>
-                {state === 'submitting' ? (
-                  <><span className="contact__spinner" /> Sending…</>
-                ) : (
-                  <>
-                    Send My Idea
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                  </>
-                )}
+              <button type="submit" className="btn btn-primary contact__submit">
+                Send My Idea
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
               </button>
               <p className="contact__form-note">
                 We respond within 24 hours. No spam, no pressure.
